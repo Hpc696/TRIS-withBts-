@@ -1,5 +1,5 @@
 let x=[], o=[];
-let giocatore=0; //determina quando tocca al giocatore con la X e quando a quell con O
+let giocatore=0; //determina quando tocca al giocatore con la X e quando a quello con O
 let clicks=0; //cont totale dei click fatti(che portano a X o O)
 let primoclick=false; //per non contare il primo click
 if (Math.round(Math.random()) == 1) { //chi inizia? a caso
@@ -26,7 +26,7 @@ function tocca_a_x() { //tocca a X e lo dice, conta i click
     document.getElementById("tocca a").innerHTML = "Turno di X";
 }
 
-function tocca_a_o() { //tocca a o e lo dice, conta i click
+function tocca_a_o() { //tocca a O e lo dice, conta i click
     if (primoclick == false)
         primoclick = true;
     else {
@@ -35,19 +35,17 @@ function tocca_a_o() { //tocca a o e lo dice, conta i click
     }
     document.getElementById("tocca a").innerHTML = "Turno di O";
 }
-//controllo if casella se è stata e da chi premuta
+//controllo if casella se è stata e da chi premuta: mostra il simbolo corrispondente e resta nascostol'altro
 function cliccato(posizione){
     if(x[posizione-1]==false && o[posizione-1]==false){
         if(giocatore=='o'){
             o[posizione-1] = true;
-            document.getElementById("casella"+posizione).src= "images/TickO.png";
-            document.getElementById("casella"+posizione).style.opacity = "1";
+            //show X //rimane hidden O
             giocatore = 'x';
             tocca_a_x();
         } else if (giocatore == 'x') {
             x[posizione-1] = true;
-            document.getElementById("casella"+posizione).src= "images/TickX.png";
-            document.getElementById("casella"+posizione).style.opacity = "1";
+            //show O rimane hidden O
             giocatore = 'o';
             tocca_a_o();
         }
@@ -81,23 +79,4 @@ function reset() {
     }
     clicks = 0;
 }
-//hover caselle
-function hox(posizione) {
-    if (x[posizione-1] == false && o[posizione-1] == false) {
-        let img=document.createElement("img");
-        img.className="myimg";
-        if (giocatore == 'x') {
-            img.src = "images/TickX.png"; 
-        } else if (giocatore == 'o') {
-            img.src = "images/TickO.png"; 
-           
-        }
-        let src = document.getElementById("casella"+posizione);
-        src.appendChild(img); 
-    } else
-        nhox(posizione);
-}
-function nhox(posizione) {
-    if (x[posizione-1] == false && o[posizione-1] == false)
-        document.getElementById("casella"+posizione).innerHTML = "";
-}
+//poi hover sbatti
