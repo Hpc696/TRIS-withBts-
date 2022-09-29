@@ -15,6 +15,11 @@ for(let i=0; i<9; i++){ //iniz l'array
     x[i]=false;
     o[i]=false;
 }
+let d= document.querySelectorAll(".visx, .viso");
+for(var eli in d){
+    const el= d[eli];
+    el.style.visibility = "hidden";
+}
 
 function tocca_a_x() { //tocca a X e lo dice, conta i click
     if (primoclick == false)
@@ -39,13 +44,17 @@ function tocca_a_o() { //tocca a O e lo dice, conta i click
 function cliccato(posizione){
     if(x[posizione-1]==false && o[posizione-1]==false){
         if(giocatore=='o'){
-            o[posizione-1] = true;
+            o[posizione-1] = true; //<div id="casella1"><i class="fa-solid fa-xmark visx"></i><i class="fa-solid fa-o viso"></i></div>
+            const img=document.querySelector("#casella"+posizione+" i.viso");
             //show X //rimane hidden O
+            img.style.visibility = "visible";
             giocatore = 'x';
             tocca_a_x();
         } else if (giocatore == 'x') {
             x[posizione-1] = true;
             //show O rimane hidden O
+            const img=document.querySelector("#casella"+posizione+" i.visx");
+            img.style.visibility = "visible";
             giocatore = 'o';
             tocca_a_o();
         }
@@ -80,3 +89,4 @@ function reset() {
     clicks = 0;
 }
 //poi hover sbatti
+//const img=document.querySelector(`#casella${posizione}i.visx`);
